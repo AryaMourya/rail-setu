@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RailSetu Assistant</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 15px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 80%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 15px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #38bdf8;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0ea5e9;
+    }
+
+    .output {
+      margin-top: 20px;
+      text-align: left;
+      background: #334155;
+      padding: 15px;
+      border-radius: 10px;
+      min-height: 80px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🚆 RailSetu</h1>
+  <p>Your Smart Travel Assistant</p>
+
+  <input id="train" placeholder="Enter Train Name/Number" />
+  <br>
+  <button onclick="getInfo()">Check Status</button>
+
+  <div class="output" id="output">
+    Enter train details to get updates...
+  </div>
+</div>
+
+<script>
+function getInfo() {
+  const train = document.getElementById("train").value;
+
+  if (!train) {
+    alert("Please enter train details");
+    return;
+  }
+
+  const delays = ["On Time", "10 mins delay", "25 mins delay", "45 mins delay"];
+  const platforms = ["1", "2", "3", "4", "5"];
+
+  const delay = delays[Math.floor(Math.random() * delays.length)];
+  const platform = platforms[Math.floor(Math.random() * platforms.length)];
+
+  let suggestion = "";
+
+  if (delay.includes("delay")) {
+    suggestion = "⚠️ Train is delayed. Consider waiting or checking alternatives.";
+  } else {
+    suggestion = "✅ Train is on time. Proceed to platform.";
+  }
+
+  document.getElementById("output").innerHTML = `
+    <strong>Train:</strong> ${train}<br><br>
+    <strong>Status:</strong> ${delay}<br>
+    <strong>Platform:</strong> ${platform}<br><br>
+    <strong>Advice:</strong> ${suggestion}
+  `;
+}
+</script>
+
+</body>
+</html>
